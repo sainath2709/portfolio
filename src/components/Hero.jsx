@@ -3,7 +3,17 @@ import { ArrowRight, Mail, Terminal, Shield, Cpu, MapPin, CheckCircle2 } from 'l
 import { candidateProfile } from '../data/portfolioData';
 
 export default function Hero() {
+  const imageCandidates = ['./profile.jpg', './profile.png', './profile.jpeg', './profile.webp'];
+  const [candidateIdx, setCandidateIdx] = useState(0);
   const [imageLoaded, setImageLoaded] = useState(true);
+
+  const handleImageError = () => {
+    if (candidateIdx < imageCandidates.length - 1) {
+      setCandidateIdx(candidateIdx + 1);
+    } else {
+      setImageLoaded(false);
+    }
+  };
 
   return (
     <section id="about" className="relative pt-12 pb-16 lg:pt-20 lg:pb-24 overflow-hidden">
@@ -122,10 +132,10 @@ export default function Hero() {
                 <div className="relative flex-1 w-full rounded-xl overflow-hidden bg-slate-900/90 border border-slate-800/60 flex items-center justify-center">
                   {imageLoaded ? (
                     <img
-                      src="./profile.jpg"
+                      src={imageCandidates[candidateIdx]}
                       alt="Chavva Sainath Reddy"
                       className="w-full h-full object-cover rounded-xl transition-all duration-300 group-hover:scale-[1.02]"
-                      onError={() => setImageLoaded(false)}
+                      onError={handleImageError}
                     />
                   ) : (
                     /* Elegant Typographic Monogram Fallback */
