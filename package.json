@@ -1,0 +1,24 @@
+{
+  "name": "chavva-sainath-reddy-portfolio",
+  "version": "2.4.0",
+  "private": true,
+  "description": "Executive Developer Portfolio for Chavva Sainath Reddy - B.Tech CSE (Data Science) VIT Vellore",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "serve": "node server.js",
+    "build": "node -e \"console.log('Static build ready in root directory.')\"",
+    "preview": "node server.js"
+  },
+  "keywords": [
+    "portfolio",
+    "developer",
+    "machine-learning",
+    "data-science",
+    "react",
+    "tailwind"
+  ],
+  "author": "Chavva Sainath Reddy <chavvasainath.r@gmail.com>",
+  "license": "MIT"
+}

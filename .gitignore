@@ -1,0 +1,10 @@
+# Logs and caches
+node_modules/
+.npm
+*.log
+.DS_Store
+Thumbs.db
+
+# Temporary files
+generate_resume.py
+*.tmp
