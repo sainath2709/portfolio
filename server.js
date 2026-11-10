@@ -1,13 +1,16 @@
 /**
  * Executive Developer Portfolio Server
  * Chavva Sainath Reddy - Portfolio HTTP Server
- * Zero external dependencies. Uses Node.js built-in http, fs, path, and url modules.
+ * Uses standard ES modules. Zero external dependencies.
  */
 
-const http = require('http');
-const fs = require('fs');
-const path = require('path');
-const url = require('url');
+import http from 'http';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const DEFAULT_PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
 const PUBLIC_DIR = __dirname;
@@ -28,8 +31,8 @@ const MIME_TYPES = {
 };
 
 const server = http.createServer((req, res) => {
-  const parsedUrl = url.parse(req.url);
-  let pathname = decodeURIComponent(parsedUrl.pathname);
+  const reqUrl = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
+  let pathname = decodeURIComponent(reqUrl.pathname);
 
   if (pathname === '/' || pathname === '') {
     pathname = '/index.html';
@@ -63,7 +66,6 @@ const server = http.createServer((req, res) => {
     const ext = path.extname(safePath).toLowerCase();
     const contentType = MIME_TYPES[ext] || 'application/octet-stream';
 
-    // Set cache control for performance
     const headers = {
       'Content-Type': contentType,
       'Content-Length': stats.size,
